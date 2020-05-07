@@ -25,17 +25,11 @@ public:
 
 	Node* top() const
 	{
-		if (isEmpty())
-			return nullptr;
-
 		return this->head;
 	}
 
 	Node* bottom() const
 	{
-		if (isEmpty())
-			return nullptr;
-
 		return this->tail;
 	}
 
@@ -109,9 +103,9 @@ public:
 
 	void remove_top() // O(1)
 	{
-		if (!isEmpty())
+		Node* node = this->head;
+		if (node)
 		{
-			Node* node = this->head;
 			this->head = node->next;
 			this->head->prev = nullptr;
 			node = nullptr;
@@ -121,9 +115,9 @@ public:
 
 	void remove_bottom() // O(1)
 	{
-		if (!isEmpty())
+		Node* node = this->tail;
+		if (node)
 		{
-			Node* node = this->tail;
 			this->tail = node->prev;
 			this->tail->next = nullptr;
 			node = nullptr;
