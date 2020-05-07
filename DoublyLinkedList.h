@@ -38,7 +38,7 @@ public:
 		return this->head == NULL;
 	}
 
-	Node* operator[](int ind) // O(N)
+	Node* operator[](int ind) // O(n)
 	{
 		unsigned int count = 0u;
 		Node *ptr = this->head;
@@ -49,15 +49,12 @@ public:
 			{
 				return ptr;
 			}
-			else
-			{
-				ptr = ptr->next;
-			}
+			ptr = ptr->next;
 		}
 		return nullptr;
 	}
 
-	Node* search(int val) const // O(N)
+	Node* search(int val) const // O(n)
 	{
 		Node *node = this->head;
 		while (node != nullptr)
@@ -74,7 +71,7 @@ public:
 		return nullptr;
 	}
 
-	void insert_before(Node *node, int val) // O(N)
+	void insert_before(Node *node, int val) // O(n)
 	{
 		if (node == this->head)
 		{
@@ -86,10 +83,12 @@ public:
 		}
 		else
 		{
+			bool wasFound = false;
 			Node* ptr = this->head;
-			while (ptr != nullptr)
+
+			while (ptr != nullptr && !wasFound)
 			{
-				if (ptr == node) // if found
+				if (ptr == node)
 				{
 					Node* newNode = new Node(val);
 
@@ -98,7 +97,7 @@ public:
 					newNode->prev->next = newNode;
 					ptr->prev = newNode;
 
-					break;
+					wasFound = true;
 				}
 				ptr = ptr->next;
 			}
@@ -153,7 +152,7 @@ public:
 		this->tail = newNode;
 	}
 
-	void print_list() const // O(N)
+	void print_list() const // O(n)
 	{
 		Node *node = head;
 		while (node != nullptr)
