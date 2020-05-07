@@ -63,10 +63,7 @@ public:
 			{
 				return node;
 			}
-			else
-			{
-				node = node->next;
-			}
+			node = node->next;
 		}
 		return nullptr;
 	}
@@ -83,10 +80,9 @@ public:
 		}
 		else
 		{
-			bool wasFound = false;
 			Node* ptr = this->head;
 
-			while (ptr != nullptr && !wasFound)
+			while (ptr != nullptr)
 			{
 				if (ptr == node)
 				{
@@ -97,7 +93,7 @@ public:
 					newNode->prev->next = newNode;
 					ptr->prev = newNode;
 
-					wasFound = true;
+					break;
 				}
 				ptr = ptr->next;
 			}
