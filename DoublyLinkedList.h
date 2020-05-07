@@ -25,11 +25,17 @@ public:
 
 	Node* top() const
 	{
+		if (isEmpty())
+			return nullptr;
+
 		return this->head;
 	}
 
 	Node* bottom() const
 	{
+		if (isEmpty())
+			return nullptr;
+
 		return this->tail;
 	}
 
@@ -57,6 +63,7 @@ public:
 	Node* search(int val) const // O(n)
 	{
 		Node *node = this->head;
+
 		while (node != nullptr)
 		{
 			if (node->val == val)
@@ -70,7 +77,7 @@ public:
 
 	void insert_before(Node *node, int val) // O(n)
 	{
-		if (node == this->head)
+		if (isEmpty() || node == this->head)
 		{
 			push_top(val);
 		}
@@ -102,20 +109,26 @@ public:
 
 	void remove_top() // O(1)
 	{
-		Node *node = this->head;
-		this->head = node->next;
-		this->head->prev = nullptr;
-		node = nullptr;
-		delete node;
+		if (!isEmpty())
+		{
+			Node* node = this->head;
+			this->head = node->next;
+			this->head->prev = nullptr;
+			node = nullptr;
+			delete node;
+		}
 	}
 
 	void remove_bottom() // O(1)
 	{
-		Node* node = this->tail;
-		this->tail = node->prev;
-		this->tail->next = nullptr;
-		node = nullptr;
-		delete node;
+		if (!isEmpty())
+		{
+			Node* node = this->tail;
+			this->tail = node->prev;
+			this->tail->next = nullptr;
+			node = nullptr;
+			delete node;
+		}
 	}
 
 	void push_top(int val) // O(1)
@@ -150,7 +163,7 @@ public:
 
 	void print_list() const // O(n)
 	{
-		Node *node = head;
+		Node* node = head;
 		while (node != nullptr)
 		{
 			std::cout << node->val << " ";
